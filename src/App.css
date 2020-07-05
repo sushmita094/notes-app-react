@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -35,4 +37,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.taskCard {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
