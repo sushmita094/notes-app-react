@@ -1,0 +1,47 @@
+@import "./fonts";
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+input,
+button {
+  font-family: "Nunito", sans-serif;
+}
+
+.page-wrapper {
+  padding: 0 40px;
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 48%);
+  grid-column-gap: 4%;
+}
+
+.task-card {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  .task-name {
+    margin: 0;
+  }
+
+  .delete-task-btn {
+    margin-left: 8px;
+  }
+}
+
+.add-task-form {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+
+  .button {
+    margin-left: 12px;
+  }
+}

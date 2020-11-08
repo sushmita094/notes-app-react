@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import TaskCard from "./components/TaskCard";
+
 import "./App.css";
 
 class App extends Component {
@@ -9,7 +12,6 @@ class App extends Component {
       taskList: [],
       inputVal: "",
       editInputVal: "",
-      editMode: false,
     };
   }
 
@@ -42,21 +44,24 @@ class App extends Component {
       inputVal: "",
     });
 
-    localStorage.setItem("taskListLocal", JSON.stringify(this.state.taskList));
-  };
-
-  onEditTask = (editIndex) => {
-    this.setState({
-      editMode: true,
-    });
+    this.updateLocalStorage();
   };
 
   onDeleteTask = (deleteIndex) => {
     let taskArr = this.state.taskList;
     taskArr = taskArr.filter((task, index) => index !== deleteIndex);
-    this.setState({
-      taskList: taskArr,
-    });
+    this.setState(
+      {
+        taskList: taskArr,
+      },
+      () => {
+        this.updateLocalStorage();
+      }
+    );
+  };
+
+  updateLocalStorage = () => {
+    localStorage.setItem("taskListLocal", JSON.stringify(this.state.taskList));
   };
 
   onChangeEditInput = (event) => {
@@ -65,59 +70,52 @@ class App extends Component {
     });
   };
 
-  onFinishEditTask = (event, editIndex) => {
-    event.preventDefault();
+  onFinishEditTask = (editIndex) => {
     let taskArr = this.state.taskList;
-    console.log("taskarr before", taskArr);
     taskArr.splice(editIndex, 1, this.state.editInputVal);
-    console.log("taskarr after", taskArr);
-    this.setState({
-      taskList: taskArr,
-      editMode: false,
-      editInputVal: "",
-    });
+    this.setState(
+      {
+        taskList: taskArr,
+        editInputVal: "",
+      },
+      () => {
+        this.updateLocalStorage();
+      }
+    );
   };
 
   render() {
     return (
-      <div className="App">
-        <form>
+      <div className="page-wrapper">
+        <form className="add-task-form">
           <input
             value={this.state.inputVal}
             onChange={(e) => this.onInputChange(e)}
             type="text"
             placeholder="Add"
           />
-          <button type="submit" onClick={(e) => this.handleAddTask(e)}>
+          <button
+            className="button"
+            type="button"
+            onClick={(e) => this.handleAddTask(e)}
+          >
             Add a Task
           </button>
         </form>
 
-        {this.state.taskList.map((task, index) => (
-          <div className="taskCard" key={index}>
-            {this.state.editMode === false ? (
-              <>
-                <p>{task}</p>
-                <button onClick={() => this.onEditTask()}>Edit</button>
-                <button onClick={() => this.onDeleteTask(index)}>Delete</button>
-              </>
-            ) : (
-              <form>
-                <input
-                  placeholder="Edit"
-                  value={this.state.editInputVal}
-                  onChange={(e) => this.onChangeEditInput(e)}
-                />
-                <button
-                  type="submit"
-                  onClick={(e) => this.onFinishEditTask(e, index)}
-                >
-                  Save
-                </button>
-              </form>
-            )}
-          </div>
-        ))}
+        <div className="tasks-grid">
+          {this.state.taskList.map((task, index) => (
+            <TaskCard
+              task={task}
+              index={index}
+              editInputVal={this.state.editInputVal}
+              handleDeleteTask={this.onDeleteTask}
+              handleChangeEditInput={this.onChangeEditInput}
+              handleFinishEditTask={this.onFinishEditTask}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
     );
   }
