@@ -5,21 +5,16 @@ import TaskCard from "./components/TaskCard";
 import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      taskList: [],
-      inputVal: "",
-      editInputVal: "",
-    };
-  }
+  state = {
+    taskList: [],
+    inputVal: "",
+    editInputVal: "",
+  };
 
   componentDidMount() {
     let taskListLocal = localStorage.getItem("taskListLocal");
     if (taskListLocal !== null) {
       taskListLocal = JSON.parse(taskListLocal);
-      console.log(taskListLocal, typeof taskListLocal);
       this.setState({
         taskList: taskListLocal,
       });
@@ -32,12 +27,16 @@ class App extends Component {
     });
   };
 
-  handleAddTask = (e) => {
-    e.preventDefault();
+  handleAddTask = () => {
+    console.log("task add func called");
     let taskArr = this.state.taskList;
     let taskName = this.state.inputVal;
+    let newTask = {
+      name: this.state.inputVal,
+      completed: false,
+    };
     if (taskName.trim()) {
-      taskArr.push(taskName);
+      taskArr.push(newTask);
     }
     this.setState({
       taskList: taskArr,
@@ -60,8 +59,11 @@ class App extends Component {
     );
   };
 
-  updateLocalStorage = () => {
-    localStorage.setItem("taskListLocal", JSON.stringify(this.state.taskList));
+  onEditTask = (editIndex) => {
+    console.log("edit started", editIndex);
+    this.setState({
+      editInputVal: this.state.taskList[editIndex].name,
+    });
   };
 
   onChangeEditInput = (event) => {
@@ -72,7 +74,8 @@ class App extends Component {
 
   onFinishEditTask = (editIndex) => {
     let taskArr = this.state.taskList;
-    taskArr.splice(editIndex, 1, this.state.editInputVal);
+    let task = taskArr[editIndex];
+    task.name = this.state.editInputVal;
     this.setState(
       {
         taskList: taskArr,
@@ -84,34 +87,62 @@ class App extends Component {
     );
   };
 
+  onMarkComplete = (index) => {
+    let taskArr = this.state.taskList;
+    let task = taskArr[index];
+    task.completed = !task.completed;
+    this.setState(
+      {
+        taskList: taskArr,
+      },
+      () => {
+        this.updateLocalStorage();
+      }
+    );
+  };
+
+  updateLocalStorage = () => {
+    localStorage.setItem("taskListLocal", JSON.stringify(this.state.taskList));
+  };
+
   render() {
+    const { inputVal, editInputVal, taskList } = this.state;
+
     return (
       <div className="page-wrapper">
-        <form className="add-task-form">
+        <div className="time-container">
+          <span className="day">FRIDAY</span>
+          <span className="date">21st Nov 2020</span>
+        </div>
+
+        <form className="add-task-form" onSubmit={this.handleAddTask}>
           <input
-            value={this.state.inputVal}
+            className="input"
+            value={inputVal}
             onChange={(e) => this.onInputChange(e)}
             type="text"
             placeholder="Add"
           />
           <button
-            className="button"
             type="button"
-            onClick={(e) => this.handleAddTask(e)}
+            className="button"
+            onClick={() => this.handleAddTask()}
           >
             Add a Task
           </button>
         </form>
 
         <div className="tasks-grid">
-          {this.state.taskList.map((task, index) => (
+          {taskList.map((task, index) => (
             <TaskCard
               task={task}
               index={index}
-              editInputVal={this.state.editInputVal}
+              editInputVal={editInputVal}
+              handleEditTask={this.onEditTask}
               handleDeleteTask={this.onDeleteTask}
               handleChangeEditInput={this.onChangeEditInput}
               handleFinishEditTask={this.onFinishEditTask}
+              handleMarkComplete={this.onMarkComplete}
               key={index}
             />
           ))}

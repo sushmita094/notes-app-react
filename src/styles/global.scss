@@ -1,5 +1,9 @@
 @import "./fonts";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Nunito", sans-serif;
 }
@@ -10,29 +14,87 @@ button {
 }
 
 .page-wrapper {
-  padding: 0 40px;
+  padding: 20px 40px;
+}
+
+.time-container {
+  width: 70%;
+  margin: 0 auto;
+
+  .date,
+  .day {
+    display: block;
+  }
+
+  .day {
+    font-size: 24px;
+    font-weight: 500;
+    color: #aaa;
+    margin-bottom: 8px;
+  }
+
+  .date {
+    font-size: 16px;
+  }
 }
 
 .tasks-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 48%);
-  grid-column-gap: 4%;
+  // display: grid;
+  // grid-template-columns: repeat(2, 48%);
+  // grid-column-gap: 4%;
+  width: 43%;
+  margin: 0 auto;
 }
 
 .task-card {
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 20px;
+  padding: 16px;
   display: flex;
   justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #eee;
+
+    .edit-task-btn,
+    .delete-task-btn {
+      opacity: 0.8;
+    }
+  }
+
+  .edit-task-btn,
+  .delete-task-btn {
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+  }
 
   .task-name {
     margin: 0;
   }
 
-  .delete-task-btn {
-    margin-left: 8px;
+  .edit-task-btn,
+  .delete-task-btn,
+  .mark-btn {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    height: 16px;
+    width: 16px;
+    padding: 0;
+    margin-left: 24px;
+
+    img {
+      height: 16px;
+      height: 16px;
+      width: 16px;
+      object-fit: contain;
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 }
 
@@ -41,7 +103,35 @@ button {
   display: flex;
   justify-content: center;
 
+  .input {
+    height: 40px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 8px;
+    min-width: 250px;
+  }
+
   .button {
     margin-left: 12px;
+    height: 40px;
+    background-color: #eee;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 0 24px;
+  }
+}
+
+.edit-task-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    flex-grow: 1;
+    margin-right: 16px;
+  }
+
+  button {
+    flex-shrink: 0;
   }
 }
