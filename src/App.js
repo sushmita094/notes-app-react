@@ -110,10 +110,10 @@ class App extends Component {
 
     return (
       <div className="page-wrapper">
-        <div className="time-container">
+        {/* <div className="time-container">
           <span className="day">FRIDAY</span>
           <span className="date">21st Nov 2020</span>
-        </div>
+        </div> */}
 
         <form className="add-task-form" onSubmit={this.handleAddTask}>
           <input
@@ -125,7 +125,7 @@ class App extends Component {
           />
           <button
             type="button"
-            className="button"
+            className="button primary-button"
             onClick={() => this.handleAddTask()}
           >
             Add a Task

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 
 import editIcon from "./../assets/edit.svg";
 import deleteIcon from "./../assets/delete.svg";
-import notCheckedIcon from "./../assets/blank-check-box.svg";
-import checkedIcon from "./../assets/check-box.svg";
+import tick from "./../assets/tick.svg";
 
 const TaskCard = ({
   task,
@@ -28,10 +27,21 @@ const TaskCard = ({
   };
 
   return (
-    <div className="task-card">
+    <div className={`task-card ${task.completed && "completed"}`}>
       {!editMode ? (
         <>
-          <p className="task-name">{task.name}</p>
+          <div className="task-card-left">
+            <button
+              className="mark-btn"
+              onClick={() => handleMarkComplete(index)}
+            >
+              <div className={`circle ${task.completed && "circle-fill"}`}>
+                <img src={tick} alt="mark task" />
+              </div>
+            </button>
+            <p className="task-name">{task.name}</p>
+          </div>
+
           <div>
             <button className="edit-task-btn" onClick={() => startEdit(index)}>
               <img src={editIcon} alt="edit task" />
@@ -42,16 +52,6 @@ const TaskCard = ({
             >
               <img src={deleteIcon} alt="delete task" />
             </button>
-            <button
-              className="mark-btn"
-              onClick={() => handleMarkComplete(index)}
-            >
-              {/* Mark {task.completed ? "Incomplete" : "Complete"} */}
-              <img
-                src={task.completed ? checkedIcon : notCheckedIcon}
-                alt="mark task"
-              />
-            </button>
           </div>
         </>
       ) : (
@@ -61,7 +61,11 @@ const TaskCard = ({
             value={editInputVal}
             onChange={(e) => handleChangeEditInput(e)}
           />
-          <button type="submit" onClick={() => saveEdits(index)}>
+          <button
+            className="primary-button"
+            type="submit"
+            onClick={() => saveEdits(index)}
+          >
             Save
           </button>
         </form>

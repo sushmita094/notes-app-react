@@ -38,25 +38,44 @@ button {
   }
 }
 
+button {
+  cursor: pointer;
+}
+
+.primary-button {
+  border: 0;
+  color: white;
+  background-color: #333;
+  border-radius: 4px;
+}
+
 .tasks-grid {
-  // display: grid;
-  // grid-template-columns: repeat(2, 48%);
-  // grid-column-gap: 4%;
   width: 43%;
   margin: 0 auto;
 }
 
 .task-card {
-  margin-bottom: 20px;
-  // border: 1px solid #ccc;
+  margin-bottom: 8px;
   border-radius: 5px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
   transition: all 0.3s ease-in-out;
 
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &.completed {
+    .task-name {
+      text-decoration: line-through;
+      color: #999;
+    }
+  }
+
   &:hover {
-    background-color: #eee;
+    // background-color: #eee;
 
     .edit-task-btn,
     .delete-task-btn {
@@ -64,26 +83,58 @@ button {
     }
   }
 
-  .edit-task-btn,
-  .delete-task-btn {
-    opacity: 0;
-    transition: all 0.4s ease-in-out;
-  }
-
   .task-name {
     margin: 0;
   }
 
-  .edit-task-btn,
-  .delete-task-btn,
   .mark-btn {
-    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-right: 24px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .circle {
+      position: relative;
+      height: 20px;
+      width: 20px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+
+      img {
+        opacity: 0;
+        height: 20px;
+        position: absolute;
+        left: 3px;
+        bottom: 1px;
+        transition: all 0.2 ease;
+      }
+
+      &.circle-fill {
+        img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .edit-task-btn,
+  .delete-task-btn {
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    margin-left: 24px;
+  }
+
+  .edit-task-btn,
+  .delete-task-btn {
     background-color: transparent;
     border: none;
     height: 16px;
     width: 16px;
     padding: 0;
-    margin-left: 24px;
 
     img {
       height: 16px;
@@ -98,29 +149,36 @@ button {
   }
 }
 
+// ----- add task form -----
 .add-task-form {
-  padding: 40px 0;
+  padding: 24px 0 40px;
   display: flex;
   justify-content: center;
 
   .input {
-    height: 40px;
-    border: 1px solid #999;
+    height: 36px;
+    border: 2px solid #ddd;
     border-radius: 4px;
     padding: 8px;
     min-width: 250px;
+
+    &:focus {
+      outline: none;
+      border-color: #999;
+    }
   }
 
   .button {
     margin-left: 12px;
-    height: 40px;
-    background-color: #eee;
-    border: 1px solid #666;
+    height: 36px;
     border-radius: 4px;
     padding: 0 24px;
+    font-size: 14px;
+    letter-spacing: 0.3px;
   }
 }
 
+// ----- edit task form -----
 .edit-task-form {
   width: 100%;
   display: flex;
@@ -128,10 +186,21 @@ button {
 
   input {
     flex-grow: 1;
+    font-size: 16px;
     margin-right: 16px;
+    background-color: transparent;
+    border: 0;
+    padding: 0 6px;
+    height: 26px;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   button {
     flex-shrink: 0;
+    padding: 0 14px;
+    height: 26px;
   }
 }
