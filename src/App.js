@@ -9,6 +9,7 @@ class App extends Component {
     taskList: [],
     inputVal: "",
     editInputVal: "",
+    isDarkMode: false,
   };
 
   componentDidMount() {
@@ -105,15 +106,28 @@ class App extends Component {
     localStorage.setItem("taskListLocal", JSON.stringify(this.state.taskList));
   };
 
+  toggleDarkMode = () => {
+    this.setState((prevState) => ({
+      isDarkMode: !prevState.isDarkMode,
+    }));
+  };
+
   render() {
-    const { inputVal, editInputVal, taskList } = this.state;
+    const { inputVal, editInputVal, taskList, isDarkMode } = this.state;
 
     return (
-      <div className="page-wrapper">
+      <div className={`page-wrapper ${isDarkMode && "dark"}`}>
         {/* <div className="time-container">
           <span className="day">FRIDAY</span>
           <span className="date">21st Nov 2020</span>
         </div> */}
+
+        <button
+          className="dark-mode-switch"
+          onClick={() => this.toggleDarkMode()}
+        >
+          Switch to {isDarkMode ? "Light" : "Dark"} Mode
+        </button>
 
         <form className="add-task-form" onSubmit={this.handleAddTask}>
           <input
