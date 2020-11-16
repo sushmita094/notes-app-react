@@ -1,0 +1,263 @@
+.page-wrapper {
+  padding: 20px 0;
+  min-height: 100vh;
+  background-color: $shade-900;
+
+  .container {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+.dark-mode-switch {
+  position: relative;
+  height: 24px;
+  width: 50px;
+  background: $shade-800;
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+
+  .indicator {
+    position: absolute;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: $shade-250;
+    border-radius: 50%;
+    transition: all 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    &.indicator-right {
+      transform: translateX(26px);
+    }
+  }
+
+  .sun {
+    padding-left: 6px;
+    filter: brightness(0) invert(1);
+  }
+
+  .moon {
+    padding-right: 6px;
+    opacity: 0.7;
+  }
+
+  img {
+    height: 12px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.tasks-grid {
+}
+
+.task-card {
+  margin-bottom: 8px;
+  border-radius: 5px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &.completed {
+    .task-name {
+      text-decoration: line-through;
+      color: $shade-600;
+      font-weight: 400;
+    }
+  }
+
+  &:hover {
+    // background-color: #eee;
+
+    .edit-task-btn,
+    .delete-task-btn {
+      opacity: 0.8;
+    }
+  }
+
+  .task-name {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .mark-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-right: 24px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .circle {
+      position: relative;
+      height: 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 6px;
+      background: $shade-850;
+
+      img {
+        opacity: 0;
+        height: 20px;
+        position: absolute;
+        left: 4px;
+        bottom: 2px;
+        transition: all 0.05s ease-in-out;
+      }
+
+      &.circle-fill {
+        img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .edit-task-btn,
+  .delete-task-btn {
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    margin-left: 24px;
+  }
+
+  .edit-task-btn,
+  .delete-task-btn {
+    background-color: transparent;
+    border: none;
+    height: 16px;
+    width: 16px;
+    padding: 0;
+
+    img {
+      height: 16px;
+      height: 16px;
+      width: 16px;
+      object-fit: contain;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+// ----- add task form -----
+.add-task-form {
+  padding: 24px 0 40px;
+  display: flex;
+  justify-content: center;
+
+  .input {
+    height: 36px;
+    border: 0;
+    border-radius: 4px;
+    padding: 8px;
+    min-width: 250px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    &:focus {
+      outline: none;
+      border-color: $shade-600;
+    }
+  }
+
+  .button {
+    margin-left: 12px;
+    height: 36px;
+    border-radius: 4px;
+    padding: 0 24px;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+}
+
+// ----- edit task form -----
+.edit-task-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    flex-grow: 1;
+    font-size: 14px;
+    margin-right: 16px;
+    background-color: transparent;
+    border: 1px solid $shade-800;
+    border-radius: 4px;
+    padding: 0 8px;
+    height: 30px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    flex-shrink: 0;
+    padding: 0 20px;
+    height: 30px;
+  }
+}
+
+// Dark theme styles
+
+.page-wrapper {
+  &.dark {
+    background-color: #000;
+    color: #fff;
+
+    .dark-mode-switch {
+      background-color: $shade-200;
+
+      .indicator {
+        background-color: $shade-800;
+      }
+    }
+
+    .task-card {
+      .mark-btn {
+        .circle {
+          background: $shade-400;
+        }
+      }
+    }
+
+    .edit-task-btn,
+    .delete-task-btn,
+    .circle {
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .primary-button {
+      background-color: $shade-900;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .add-task-form {
+      input {
+        color: #fff;
+        background-color: $shade-300;
+      }
+    }
+  }
+}

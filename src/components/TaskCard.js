@@ -62,7 +62,7 @@ const TaskCard = ({
             onChange={(e) => handleChangeEditInput(e)}
           />
           <button
-            className="primary-button"
+            className="secondary-button"
             type="submit"
             onClick={() => saveEdits(index)}
           >

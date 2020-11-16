@@ -2,6 +2,9 @@ import React, { Component } from "react";
 
 import TaskCard from "./components/TaskCard";
 
+import sun from "./assets/sun.svg";
+import moon from "./assets/moon.svg";
+
 import "./App.css";
 
 class App extends Component {
@@ -117,49 +120,51 @@ class App extends Component {
 
     return (
       <div className={`page-wrapper ${isDarkMode && "dark"}`}>
-        {/* <div className="time-container">
-          <span className="day">FRIDAY</span>
-          <span className="date">21st Nov 2020</span>
-        </div> */}
-
-        <button
-          className="dark-mode-switch"
-          onClick={() => this.toggleDarkMode()}
-        >
-          Switch to {isDarkMode ? "Light" : "Dark"} Mode
-        </button>
-
-        <form className="add-task-form" onSubmit={this.handleAddTask}>
-          <input
-            className="input"
-            value={inputVal}
-            onChange={(e) => this.onInputChange(e)}
-            type="text"
-            placeholder="Add"
-          />
+        <div className="container">
           <button
-            type="button"
-            className="button primary-button"
-            onClick={() => this.handleAddTask()}
+            className="dark-mode-switch"
+            onClick={() => this.toggleDarkMode()}
           >
-            Add a Task
+            {/* Switch to {isDarkMode ? "Light" : "Dark"} Mode */}
+            <img src={sun} className="sun" alt="toggle for dark/light mode" />
+            <img src={moon} className="moon" alt="toggle for dark/light mode" />
+            <span
+              className={`indicator ${isDarkMode && "indicator-right"}`}
+            ></span>
           </button>
-        </form>
 
-        <div className="tasks-grid">
-          {taskList.map((task, index) => (
-            <TaskCard
-              task={task}
-              index={index}
-              editInputVal={editInputVal}
-              handleEditTask={this.onEditTask}
-              handleDeleteTask={this.onDeleteTask}
-              handleChangeEditInput={this.onChangeEditInput}
-              handleFinishEditTask={this.onFinishEditTask}
-              handleMarkComplete={this.onMarkComplete}
-              key={index}
+          <form className="add-task-form" onSubmit={this.handleAddTask}>
+            <input
+              className="input"
+              value={inputVal}
+              onChange={(e) => this.onInputChange(e)}
+              type="text"
+              placeholder="Add"
             />
-          ))}
+            <button
+              type="button"
+              className="button primary-button"
+              onClick={() => this.handleAddTask()}
+            >
+              Add a Task
+            </button>
+          </form>
+
+          <div className="tasks-grid">
+            {taskList.map((task, index) => (
+              <TaskCard
+                task={task}
+                index={index}
+                editInputVal={editInputVal}
+                handleEditTask={this.onEditTask}
+                handleDeleteTask={this.onDeleteTask}
+                handleChangeEditInput={this.onChangeEditInput}
+                handleFinishEditTask={this.onFinishEditTask}
+                handleMarkComplete={this.onMarkComplete}
+                key={index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

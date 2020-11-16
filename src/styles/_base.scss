@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  color: $shade-100;
+}
+
+input,
+button {
+  font-family: "Nunito", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+.primary-button {
+  background-color: $shade-200;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+}
+
+.secondary-button {
+  background-color: $shade-800;
+  color: $shade-100;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+}

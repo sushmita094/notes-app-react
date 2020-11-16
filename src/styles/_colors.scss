@@ -1,0 +1,30 @@
+$shade-100: #141414;
+$shade-200: #333333;
+$shade-300: #525252;
+$shade-400: #666666;
+$shade-500: #7a7a7a;
+$shade-600: #999999;
+$shade-700: #b8b8b8;
+$shade-800: #d6d6d6;
+$shade-900: #f5f5f5;
+
+$shade-250: #3d3d3d;
+$shade-850: #e2e2e2;
+
+$colors: (
+  100: $shade-100,
+  200: $shade-200,
+  300: $shade-300,
+  400: $shade-400,
+  500: $shade-500,
+  600: $shade-600,
+  700: $shade-700,
+  800: $shade-800,
+  900: $shade-900,
+);
+
+@each $value, $color in $colors {
+  .color-#{$value} {
+    background-color: $color;
+  }
+}
