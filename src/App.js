@@ -31,8 +31,8 @@ class App extends Component {
     });
   };
 
-  handleAddTask = () => {
-    console.log("task add func called");
+  handleAddTask = (e) => {
+    e.preventDefault();
     let taskArr = this.state.taskList;
     let taskName = this.state.inputVal;
     let newTask = {
@@ -64,7 +64,6 @@ class App extends Component {
   };
 
   onEditTask = (editIndex) => {
-    console.log("edit started", editIndex);
     this.setState({
       editInputVal: this.state.taskList[editIndex].name,
     });
@@ -133,7 +132,10 @@ class App extends Component {
             ></span>
           </button>
 
-          <form className="add-task-form" onSubmit={this.handleAddTask}>
+          <form
+            className="add-task-form"
+            onSubmit={(e) => this.handleAddTask(e)}
+          >
             <input
               className="input"
               value={inputVal}
@@ -144,7 +146,7 @@ class App extends Component {
             <button
               type="button"
               className="button primary-button"
-              onClick={() => this.handleAddTask()}
+              onClick={(e) => this.handleAddTask(e)}
             >
               Add a Task
             </button>
