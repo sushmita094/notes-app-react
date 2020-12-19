@@ -23,6 +23,13 @@ class App extends Component {
         taskList: taskListLocal,
       });
     }
+
+    let userMode = localStorage.getItem("userMode");
+    if (userMode === "dark") {
+      this.setState({
+        isDarkMode: true,
+      });
+    }
   }
 
   onInputChange = (event) => {
@@ -109,9 +116,18 @@ class App extends Component {
   };
 
   toggleDarkMode = () => {
-    this.setState((prevState) => ({
-      isDarkMode: !prevState.isDarkMode,
-    }));
+    this.setState(
+      (prevState) => ({
+        isDarkMode: !prevState.isDarkMode,
+      }),
+      () => {
+        if (this.state.isDarkMode) {
+          localStorage.setItem("userMode", "dark");
+        } else {
+          localStorage.setItem("userMode", "light");
+        }
+      }
+    );
   };
 
   render() {
