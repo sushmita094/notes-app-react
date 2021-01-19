@@ -136,17 +136,24 @@ class App extends Component {
     return (
       <div className={`page-wrapper ${isDarkMode && "dark"}`}>
         <div className="container">
-          <button
-            className="dark-mode-switch"
-            onClick={() => this.toggleDarkMode()}
-          >
-            {/* Switch to {isDarkMode ? "Light" : "Dark"} Mode */}
-            <img src={sun} className="sun" alt="toggle for dark/light mode" />
-            <img src={moon} className="moon" alt="toggle for dark/light mode" />
-            <span
-              className={`indicator ${isDarkMode && "indicator-right"}`}
-            ></span>
-          </button>
+          <div className="header">
+            <h1 className="heading">Taskify</h1>
+            <button
+              className="dark-mode-switch"
+              onClick={() => this.toggleDarkMode()}
+            >
+              {/* Switch to {isDarkMode ? "Light" : "Dark"} Mode */}
+              <img src={sun} className="sun" alt="toggle for dark/light mode" />
+              <img
+                src={moon}
+                className="moon"
+                alt="toggle for dark/light mode"
+              />
+              <span
+                className={`indicator ${isDarkMode && "indicator-right"}`}
+              ></span>
+            </button>
+          </div>
 
           <form
             className="add-task-form"

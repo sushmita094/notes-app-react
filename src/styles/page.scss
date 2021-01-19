@@ -17,6 +17,19 @@
   }
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .heading {
+    font-family: "Pacifico", cursive;
+    font-size: 28px;
+    letter-spacing: 1.3px;
+    margin: 0;
+  }
+}
+
 .dark-mode-switch {
   position: relative;
   height: 24px;
@@ -80,6 +93,10 @@
     align-items: center;
   }
 
+  &-right {
+    flex-shrink: 0;
+  }
+
   &.completed {
     .task-name {
       text-decoration: line-through;
@@ -93,7 +110,7 @@
 
     .edit-task-btn,
     .delete-task-btn {
-      opacity: 0.8;
+      opacity: 0.5;
     }
   }
 
@@ -144,7 +161,7 @@
     margin-left: 24px;
 
     @media (max-width: 1024px) {
-      opacity: 0.8;
+      opacity: 0.5;
     }
   }
 

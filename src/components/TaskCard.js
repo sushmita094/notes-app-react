@@ -42,7 +42,7 @@ const TaskCard = ({
             <p className="task-name">{task.name}</p>
           </div>
 
-          <div>
+          <div className="task-card-right">
             <button className="edit-task-btn" onClick={() => startEdit(index)}>
               <img src={editIcon} alt="edit task" />
             </button>
